@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "check:web": "moon run web:check",
-    "check:api": "moon run api:check"
+    "check:api": "moon run api:check",
+    "check": "npm run check:web && npm run check:api"
   },
   "keywords": [],
   "author": "",
