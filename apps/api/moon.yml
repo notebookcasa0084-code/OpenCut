@@ -6,7 +6,6 @@ fileGroups:
 
 tasks:
   check:
-    command: 'tsc --noEmit'
+    command: 'npx tsc --noEmit'
     inputs:
       - 'src/**/*'
-      - 'tsconfig.json'
