@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { createProject, getProjects, Project } from "../services/api";
+import { createProject, getProjects } from "../services/api";
+import type { Project } from "../services/api";
 
 export function CreateProjectForm() {
   const [name, setName] = useState("");
