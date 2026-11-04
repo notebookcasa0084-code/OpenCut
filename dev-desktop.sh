@@ -1,11 +1,19 @@
-#!/bin/bash
-echo "=== Verificando dependências gráficas para o Desktop ==="
-if ! command -v xvfb-run &> /dev/null; then
-    echo "Instalando Xvfb para suporte gráfico headless..."
-    sudo apt-get update && sudo apt-get install -y xvfb libxkbcommon-dev libxkbcommon-x11-dev
+#!/usr/bin/env bash
+set -e
+
+echo "==> Verificando servidor de exibição headless (Xvfb)..."
+
+if [ -z "$DISPLAY" ]; then
+    export DISPLAY=:99
 fi
 
-echo "Iniciando versão desktop sob Xvfb..."
-export PROTO_HOME="$HOME/.proto"
-export PATH="$PROTO_HOME/bin:$PATH"
-xvfb-run -a moon run desktop:dev
+if ! pgrep -x "Xvfb" > /dev/null; then
+    echo "==> Iniciando Xvfb no DISPLAY $DISPLAY..."
+    Xvfb $DISPLAY -screen 0 1280x1024x24 &
+    sleep 1
+else
+    echo "==> Xvfb já está rodando no DISPLAY $DISPLAY."
+fi
+
+echo "==> Compilando e executando OpenCut Desktop (GPUI)..."
+cargo run --bin desktop
