@@ -1,24 +1,12 @@
 $schema: 'https://moonrepo.dev/schemas/project.json'
 
-language: 'typescript'
-layer: 'application'
+fileGroups:
+  sources:
+    - 'src/**/*'
 
 tasks:
-  dev:
-    command: 'bun run dev'
-    options:
-      runInCI: false  # dev server: skipped in CI, never cached
-
-  build:
-    command: 'bun run build'
+  check:
+    command: 'tsc --noEmit'
     inputs:
       - 'src/**/*'
-      - 'wrangler.jsonc'
-      - 'package.json'
-    outputs:
-      - 'dist'
-
-  deploy:
-    command: 'bun run deploy'
-    deps:
-      - '~:build'
+      - 'tsconfig.json'
