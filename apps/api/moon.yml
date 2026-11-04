@@ -3,9 +3,11 @@ $schema: 'https://moonrepo.dev/schemas/project.json'
 fileGroups:
   sources:
     - 'src/**/*'
+    - 'tsconfig.json'
 
 tasks:
   check:
-    command: 'npx tsc --noEmit'
+    command: 'npx tsc --noEmit -p tsconfig.json'
     inputs:
       - 'src/**/*'
+      - 'tsconfig.json'
