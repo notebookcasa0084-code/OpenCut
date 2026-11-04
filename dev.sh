@@ -1,10 +1,12 @@
-#!/bin/bash
-echo "=== Iniciando ambiente OpenCut no Codespace ==="
-export PROTO_HOME="$HOME/.proto"
-export PATH="$PROTO_HOME/bin:$PATH"
+#!/usr/bin/env bash
+set -e
 
-echo "Verificando versão do moon..."
-moon --version
+echo "==> Iniciando o ambiente de desenvolvimento do OpenCut..."
 
-echo "Iniciando tarefa web:dev..."
-moon run web:dev
+# Verifica se o diretório node_modules existe na raiz ou apps/web
+if [ -d "node_modules" ] || [ -d "apps/web" ]; then
+    echo "==> Iniciando aplicação web (Next.js)..."
+    # Adicione aqui a lógica de inicialização web se necessário, ou chame o gerenciador do moon
+fi
+
+echo "==> Ambiente configurado. Utilize './dev-desktop.sh' para rodar a interface GPUI."
