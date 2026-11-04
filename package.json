@@ -12,7 +12,8 @@
     "check:api": "moon run api:check",
     "check": "bun run check:web && bun run check:api",
     "dev:web": "bun --filter web dev",
-    "dev:api": "bun --filter api dev"
+    "dev:api": "bun --filter api dev",
+    "dev": "bun --filter \"*\" dev"
   },
   "keywords": [],
   "author": "",
