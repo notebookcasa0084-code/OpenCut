@@ -1,0 +1,13 @@
+{
+  "name": "OpenCut",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "check:web": "moon run web:check"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
