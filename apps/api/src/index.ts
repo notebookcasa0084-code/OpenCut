@@ -1,28 +1,24 @@
-import { Elysia, t } from "elysia";
-import { CloudflareAdapter } from "elysia/adapter/cloudflare-worker";
-import { createProject, getProjects, validateProject } from "./services/project.service.js";
+import { Elysia } from 'elysia';
+import { cors } from '@elysiajs/cors';
 
-export default new Elysia({ adapter: CloudflareAdapter })
-  .get("/", () => ({ status: "ok", service: "OpenCut API" }))
-  .get("/projects", () => {
-    return { projects: getProjects() };
+interface Project {
+  name: string;
+  fps?: number;
+  resolution?: string;
+}
+
+const projects: Project[] = [];
+
+const app = new Elysia()
+  .use(cors())
+  .get('/projects', () => ({ projects }))
+  .post('/projects', ({ body }) => {
+    const newProject = body as Project;
+    projects.push(newProject);
+    return { success: true, project: newProject };
   })
-  .post(
-    "/projects",
-    ({ body, set }) => {
-      if (!validateProject(body)) {
-        set.status = 400;
-        return { error: "Invalid project payload: name is required" };
-      }
-      const project = createProject(body);
-      return { success: true, project };
-    },
-    {
-      body: t.Object({
-        name: t.String(),
-        fps: t.Optional(t.Number()),
-        resolution: t.Optional(t.String()),
-      }),
-    }
-  )
-  .compile();
+  .listen(3000);
+
+console.log(
+  `🦊 OpenCut API is running at ${app.server?.hostname}:${app.server?.port}`
+);
