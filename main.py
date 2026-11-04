@@ -31,5 +31,5 @@ if __name__ == "__main__":
     try:
         main()
     except Exception as e:
-        logger.error(f crítico não tratado no main: {e}")
+        logger.error(f"Erro crítico não tratado no main: {e}")
         sys.exit(1)
