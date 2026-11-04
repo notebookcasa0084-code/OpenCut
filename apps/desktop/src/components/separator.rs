@@ -1,37 +1,16 @@
-use gpui::{App, IntoElement, RenderOnce, Window, div, prelude::*, px};
-
-use crate::{components::Orientation, theme::ActiveTheme};
+use gpui::*;
 
 #[derive(IntoElement)]
-pub(crate) struct Separator {
-    orientation: Orientation,
-}
+pub struct Separator;
 
 impl Separator {
-    pub(crate) fn horizontal() -> Self {
-        Self {
-            orientation: Orientation::Horizontal,
-        }
-    }
-
-    #[allow(dead_code)]
-    pub(crate) fn vertical() -> Self {
-        Self {
-            orientation: Orientation::Vertical,
-        }
+    pub fn new() -> Self {
+        Self
     }
 }
 
-impl RenderOnce for Separator {
-    fn render(self, window: &mut Window, _cx: &mut App) -> impl IntoElement {
-        let color = window.theme().colors.border.opacity(0.5);
-
-        div()
-            .flex_none()
-            .bg(color)
-            .map(|this| match self.orientation {
-                Orientation::Horizontal => this.w_full().h(px(1.0)),
-                Orientation::Vertical => this.h_full().w(px(1.0)),
-            })
+impl Render for Separator {
+    fn render(&mut self, _cx: &mut ViewContext<Self>) -> impl IntoElement {
+        div().w_full().h_px().bg_border()
     }
 }
