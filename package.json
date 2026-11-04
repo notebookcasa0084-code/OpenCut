@@ -7,7 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "check:web": "moon run web:check",
     "check:api": "moon run api:check",
-    "check": "npm run check:web && npm run check:api"
+    "check": "bun run check:web && bun run check:api",
+    "dev:web": "bun --filter web dev",
+    "dev:api": "bun --filter api dev"
   },
   "keywords": [],
   "author": "",
