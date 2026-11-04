@@ -1,69 +1,29 @@
-use gpui::{
-    App, FontWeight, IntoElement, RenderOnce, SharedString, Window, div, prelude::*, px,
-    transparent_black,
-};
-
-use crate::theme::ActiveTheme;
-
-#[allow(dead_code)]
-#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
-pub(crate) enum BadgeVariant {
-    #[default]
-    Default,
-    Secondary,
-    Outline,
-    Destructive,
-}
+use gpui::*;
 
 #[derive(IntoElement)]
-pub(crate) struct Badge {
-    label: SharedString,
+pub struct Badge {
+    text: SharedString,
     variant: BadgeVariant,
 }
 
-impl Badge {
-    pub(crate) fn new(label: impl Into<SharedString>) -> Self {
-        Self {
-            label: label.into(),
-            variant: BadgeVariant::default(),
-        }
-    }
+#[derive(Copy, Clone, Debug, PartialEq, Eq)]
+pub enum BadgeVariant {
+    Primary,
+    Secondary,
+    Outline,
+}
 
-    pub(crate) fn variant(mut self, variant: BadgeVariant) -> Self {
-        self.variant = variant;
-        self
+impl Badge {
+    pub fn new(text: impl Into<SharedString>, variant: BadgeVariant) -> Self {
+        Self {
+            text: text.into(),
+            variant,
+        }
     }
 }
 
-impl RenderOnce for Badge {
-    fn render(self, window: &mut Window, _cx: &mut App) -> impl IntoElement {
-        let colors = window.theme().colors;
-        let transparent = transparent_black();
-        let (background, foreground, border) = match self.variant {
-            BadgeVariant::Default => (colors.primary, colors.primary_foreground, transparent),
-            BadgeVariant::Secondary => (colors.secondary, colors.secondary_foreground, transparent),
-            BadgeVariant::Outline => (transparent, colors.foreground, colors.border),
-            BadgeVariant::Destructive => (
-                colors.destructive.opacity(0.1),
-                colors.destructive,
-                transparent,
-            ),
-        };
-
-        div()
-            .flex()
-            .flex_none()
-            .items_center()
-            .h(px(20.0))
-            .px(px(6.0))
-            .rounded_full()
-            .border_1()
-            .border_color(border)
-            .bg(background)
-            .text_color(foreground)
-            .text_size(px(10.0))
-            .font_weight(FontWeight::MEDIUM)
-            .whitespace_nowrap()
-            .child(self.label)
+impl Render for Badge {
+    fn render(&mut self, _cx: &mut ViewContext<Self>) -> impl IntoElement {
+        div().flex().items_center().px_2().py_1().rounded_md().child(self.text.clone())
     }
 }
