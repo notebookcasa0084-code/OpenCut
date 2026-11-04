@@ -8,3 +8,15 @@ docs/
 
 # moon runtime cache
 .moon/cache/
+
+# Bundler & framework artifacts
+.wrangler/
+*.lock
+pnpm-lock.yaml
+package-lock.json
+
+# Bundler & framework artifacts
+.wrangler/
+*.lock
+pnpm-lock.yaml
+package-lock.json
