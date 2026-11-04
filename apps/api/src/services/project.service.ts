@@ -14,7 +14,7 @@ export function getProjects(): ProjectPayload[] {
 
 export function createProject(payload: ProjectPayload): ProjectPayload {
   const newProject: ProjectPayload = {
-    id: Math.random().toString(36.substring(2, 9)),
+    id: Math.random().toString(36).substring(2, 9),
     name: payload.name.trim(),
     fps: payload.fps || 60,
     resolution: payload.resolution || "1080p",
