@@ -1,8 +1,16 @@
+export interface Clip {
+  id: string;
+  name: string;
+  duration: number; // em segundos
+  type: "video" | "audio" | "text";
+}
+
 export interface ProjectPayload {
   id?: string;
   name: string;
   fps?: number;
   resolution?: string;
+  clips?: Clip[];
   createdAt?: string;
 }
 
@@ -18,6 +26,7 @@ export function createProject(payload: ProjectPayload): ProjectPayload {
     name: payload.name.trim(),
     fps: payload.fps || 60,
     resolution: payload.resolution || "1080p",
+    clips: payload.clips || [],
     createdAt: new Date().toISOString(),
   };
   projects.push(newProject);
