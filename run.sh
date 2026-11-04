@@ -1,19 +1,8 @@
-#!/bin/bash
-echo "=== OpenCut - Gerenciador de Inicialização ==="
-echo "Escolha o modo de execução:"
-echo "1) Web (Porta 5173)"
-echo "2) Desktop (via Xvfb)"
-read -p "Digite sua escolha [1 ou 2]: " choice
+#!/usr/bin/env bash
+set -e
 
-case $choice in
-    1)
-        ./dev.sh
-        ;;
-    2)
-        ./dev-desktop.sh
-        ;;
-    *)
-        echo "Opção inválida. Executando modo Web por padrão..."
-        ./dev.sh
-        ;;
-esac
+echo "==> Verificando dependências e permissões dos scripts..."
+chmod +x dev.sh dev-desktop.sh 2>/dev/null || true
+
+echo "==> Executando inicializador principal do OpenCut..."
+./dev.sh
