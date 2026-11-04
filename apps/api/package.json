@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.1",
   "scripts": {
-    "dev": "wrangler dev",
+    "dev": "bun --hot src/index.ts",
     "deploy": "wrangler deploy",
     "build": "wrangler deploy --dry-run"
   },
