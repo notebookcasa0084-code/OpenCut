@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { useEffect, useState } from 'react';
-import { getProjects, createProject, Project } from '../lib/api';
+import { getProjects, createProject, type Project } from '../lib/api';
 
 export const Route = createFileRoute('/')({
   component: DashboardComponent,
@@ -9,7 +9,7 @@ export const Route = createFileRoute('/')({
 function DashboardComponent() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [name, setName] = useState('');
-  const [fps, setFps] = useState(30);
+  const [fps] = useState(30);
   const [resolution, setResolution] = useState('1920x1080');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -70,8 +70,8 @@ function DashboardComponent() {
               <input
                 type="number"
                 value={fps}
-                onChange={(e) => Number(e.target.value)}
-                style={{ width: '100%', padding: '0.5rem', borderRadius: '4px', border: '1px solid #ccc' }}
+                disabled
+                style={{ width: '100%', padding: '0.5rem', borderRadius: '4px', border: '1px solid #ccc', background: '#e9ecef' }}
               />
             </div>
             <div style={{ flex: 1 }}>
