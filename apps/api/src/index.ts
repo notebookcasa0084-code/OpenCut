@@ -1,6 +1,6 @@
 import { Elysia, t } from "elysia";
 import { CloudflareAdapter } from "elysia/adapter/cloudflare-worker";
-import { createProject, getProjects, validateProject } from "./services/project.service.ts";
+import { createProject, getProjects, validateProject } from "./services/project.service.js";
 
 export default new Elysia({ adapter: CloudflareAdapter })
   .get("/", () => ({ status: "ok", service: "OpenCut API" }))
