@@ -1,17 +1,20 @@
 import { Elysia, t } from "elysia";
 import { CloudflareAdapter } from "elysia/adapter/cloudflare-worker";
-import { createProject, getProjects, validateProject } from "./services/project.service";
+import { createProject, getProjects, validateProject } from "./services/project.service.ts";
 
 export default new Elysia({ adapter: CloudflareAdapter })
   .get("/", () => ({ status: "ok", service: "OpenCut API" }))
-  .get("/projects", () => ({ projects: getProjects() }))
+  .get("/projects", () => {
+    return { projects: getProjects() };
+  })
   .post(
     "/projects",
-    (context: { body: { name: string; fps?: number; resolution?: string } }) => {
-      if (!validateProject(context.body)) {
-        return { success: false, error: "Invalid project name" };
+    ({ body, set }) => {
+      if (!validateProject(body)) {
+        set.status = 400;
+        return { error: "Invalid project payload: name is required" };
       }
-      const project = createProject(context.body);
+      const project = createProject(body);
       return { success: true, project };
     },
     {
