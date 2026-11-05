@@ -16,3 +16,8 @@ target/
 bun.lock
 package-lock.json
 pnpm-lock.yaml
+
+# Python build artifacts and egg-info
+*.egg-info/
+build/
+dist/
