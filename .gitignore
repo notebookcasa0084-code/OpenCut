@@ -11,3 +11,8 @@ node_modules
 target/
 .wrangler/
 .env.local
+
+# Package manager lock files
+bun.lock
+package-lock.json
+pnpm-lock.yaml
