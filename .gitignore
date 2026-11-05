@@ -1,22 +1,12 @@
-node_modules/
-dist/
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+output/
+temp/
+node_modules
+
+# Build, cache and wrangler directories
+.moon/
 target/
-.env
-.env.*
-!.env.example
-docs/
-
-# moon runtime cache
-.moon/cache/
-
-# Bundler & framework artifacts
 .wrangler/
-*.lock
-pnpm-lock.yaml
-package-lock.json
-
-# Bundler & framework artifacts
-.wrangler/
-*.lock
-pnpm-lock.yaml
-package-lock.json
